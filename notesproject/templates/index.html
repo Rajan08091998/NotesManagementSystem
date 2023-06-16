@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+        function ShowHideDiv() {
+            var file_type = document.getElementById("file_type");
+            var notes = document.getElementById("notes");
+            var file = document.getElementById("file");
+
+            notes.style.display = file_type.value == "text" ? "block" : "none";
+            file.style.display = (file_type.value == "audio" || file_type.value == "video" )  ? "block" : "none";
+
+        }
+    </script>
+    
+</head>
+<body>
+
+<h2>Notes</h2>
+
+<form enctype="multipart/form-data" action="/" method="post">
+    {% csrf_token %}
+  <label for="title">Title:</label><br>
+  <input type="text" id="title" name="title"><br>
+  <label for="file_type">File Type:</label><br>
+  <select id = "file_type" name="file_type" onchange = "ShowHideDiv()">
+    <option >--Select--</option>
+    <option value="text">Text</option>
+    <option value="audio">Audio</option>            
+    <option value="video">Video</option>                    
+</select><br><br>
+    <div id="notes" style="display:none">
+  <label for="notes">Notes:</label><br>
+  <input type="text"  name="notes" ><br><br>
+</div>
+<div id="file" style="display:none">
+    <label for="file">File:</label><br>
+    <input type="file" name="file" ><br><br>
+</div>
+  
+  <input type="submit" value="Submit">
+</form> 
+
+
+</body>
+</html>
